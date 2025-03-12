@@ -5,20 +5,12 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 
 const port = process.env.PORT||4000;
-const allowedOrigins = [
-  'http://localhost:5173', // Local development
-  'https://dev-connect-peach.vercel.app/' // Deployed vercel link
-];
+
+require('dotenv').config();
 
 app.use(cors({
-  origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
-          callback(null, true);
-      } else {
-          callback(new Error('Not allowed by CORS'));
-      }
-  },
-  credentials: true, // If you need to include cookies in requests
+    origin: process.env.FRONTEND_URL,
+    credentials: true // If you need to include cookies in requests
 }));
 
 app.use(express.json());
