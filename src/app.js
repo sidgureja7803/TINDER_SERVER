@@ -7,8 +7,7 @@ const cors = require("cors");
 const port = process.env.PORT||4000;
 const allowedOrigins = [
   'http://localhost:5173', // Local development
-  'https://dev-tinder-frontend-nine.vercel.app', // Deployed frontend
-  'https://dev-connect-peach.vercel.app/'
+  'https://dev-connect-peach.vercel.app/' // Deployed vercel link
 ];
 
 app.use(cors({
