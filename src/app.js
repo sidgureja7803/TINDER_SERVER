@@ -8,9 +8,20 @@ const port = process.env.PORT||4000;
 
 require('dotenv').config();
 
+const allowedOrigins = [
+  'http://localhost:5174', // Local development
+  process.env.FRONTEND_URL // Deployed vercel link from env variable
+];
+
 app.use(cors({
-    origin: process.env.FRONTEND_URL,
-    credentials: true // If you need to include cookies in requests
+  origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+          callback(null, true);
+      } else {
+          callback(new Error('Not allowed by CORS'));
+      }
+  },
+  credentials: true // If you need to include cookies in requests
 }));
 
 app.use(express.json());
